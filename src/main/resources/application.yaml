@@ -1,0 +1,7 @@
+amazon:
+  access:
+    key: ${AWS_ACCESS_KEY_ID}
+    secret-key: ${AWS_SECRET_ACCESS_KEY}
+  region: ${AWS_REGION}
+  end-point:
+    url: ${AWS_DYNAMODB_URL}
