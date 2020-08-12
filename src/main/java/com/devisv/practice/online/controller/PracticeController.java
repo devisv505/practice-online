@@ -19,8 +19,9 @@ public class PracticeController {
   }
 
   @PostMapping
-  public void create(@RequestBody Practice practice) {
+  public Practice create(@RequestBody Practice practice) {
     practiceService.create(practice);
+    return practice;
   }
 
   @PutMapping

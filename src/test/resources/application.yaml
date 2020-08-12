@@ -1,0 +1,7 @@
+amazon:
+  access:
+    key: foo
+    secret-key: foo
+  region: eu-central-1
+  end-point:
+    url: localhost:8000
