@@ -38,8 +38,8 @@ public class PracticeRepository {
   private DynamoDBSaveExpression getDynamoDBSaveExpression(Practice practice) {
     DynamoDBSaveExpression expression = new DynamoDBSaveExpression();
 
-    ExpectedAttributeValue expectedAttributeValue = new ExpectedAttributeValue(new AttributeValue(practice.getPracticeId()))
-        .withComparisonOperator(ComparisonOperator.LE);
+    ExpectedAttributeValue expectedAttributeValue = new ExpectedAttributeValue(new AttributeValue(practice.getPrimaryKey()))
+        .withComparisonOperator(ComparisonOperator.EQ);
 
     expression.setExpected(Map.of("practiceId", expectedAttributeValue));
 

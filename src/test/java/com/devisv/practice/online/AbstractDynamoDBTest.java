@@ -1,17 +1,17 @@
 package com.devisv.practice.online;
 
-import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.model.AttributeDefinition;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
-import com.amazonaws.services.dynamodbv2.model.KeySchemaElement;
-import com.amazonaws.services.dynamodbv2.model.KeyType;
 import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
-import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType;
-import java.util.Arrays;
+import com.amazonaws.services.dynamodbv2.util.TableUtils;
+import com.devisv.practice.online.model.OnlinePractice;
+import com.devisv.practice.online.model.Practice;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.util.TestPropertyValues;
@@ -30,10 +30,15 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ContextConfiguration(initializers = AbstractDynamoDBTest.Initializer.class)
 public abstract class AbstractDynamoDBTest {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDynamoDBTest.class);
+
   private static final int DYNAMO_PORT = 8000;
 
   @Autowired
   private AmazonDynamoDB db;
+
+  @Autowired
+  private DynamoDBMapper dynamoDBMapper;
 
   @ClassRule
   public static GenericContainer dynamoDb =
@@ -48,26 +53,16 @@ public abstract class AbstractDynamoDBTest {
    */
   @Before
   public void init() {
-    CreateTableRequest request = new CreateTableRequest()
-        .withKeySchema(
-            Arrays.asList(
-                new KeySchemaElement("pk", KeyType.HASH), // Partition key
-                new KeySchemaElement("sk", KeyType.RANGE) // Sort key
-            )
-        )
-        .withAttributeDefinitions(
-            Arrays.asList(
-                new AttributeDefinition("pk", ScalarAttributeType.S),
-                new AttributeDefinition("sk", ScalarAttributeType.S)
-            )
-        )
-        .withProvisionedThroughput(new ProvisionedThroughput(10L, 10L))
-        .withTableName("practice");
 
-    try {
-      db.createTable(request);
-    } catch (AmazonServiceException e) {
-      throw new RuntimeException(e);
+    CreateTableRequest tableRequest = dynamoDBMapper.generateCreateTableRequest(OnlinePractice.class);
+    tableRequest.setProvisionedThroughput(new ProvisionedThroughput(1L, 1L));
+
+    boolean created = TableUtils.createTableIfNotExists(db, tableRequest);
+
+    if (created) {
+      LOGGER.info("Created DynamoDB table for " + Practice.class.getSimpleName());
+    } else {
+      LOGGER.info("Table already exists for " + Practice.class.getSimpleName());
     }
   }
 
