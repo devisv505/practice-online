@@ -1,23 +1,34 @@
-package com.devisv.practice.online.dto;
+package com.devisv.practice.online.model;
 
-import com.devisv.practice.online.model.Level;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
+import com.devisv.practice.online.core.model.OnlinePractice;
 
-public class CourseDto {
+public class Course extends OnlinePractice {
 
+  @DynamoDBAttribute
   private String name;
 
+  @DynamoDBAttribute
+  @DynamoDBTypeConvertedEnum
   private Level level;
 
+  @DynamoDBAttribute
   private boolean enabledForUnregistered;
 
+  @DynamoDBAttribute
   private boolean free;
 
+  @DynamoDBAttribute
   private int likes;
 
+  @DynamoDBAttribute
   private int started;
 
+  @DynamoDBAttribute
   private int finished;
 
+  @DynamoDBAttribute
   private int cost;
 
   public String getName() {
