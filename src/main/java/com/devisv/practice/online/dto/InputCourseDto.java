@@ -2,7 +2,7 @@ package com.devisv.practice.online.dto;
 
 import com.devisv.practice.online.model.Level;
 
-public class CourseDto {
+public class InputCourseDto {
 
   private String name;
 

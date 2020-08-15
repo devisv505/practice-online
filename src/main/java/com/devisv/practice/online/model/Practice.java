@@ -16,4 +16,5 @@ public class Practice extends OnlinePractice {
   public void setSentence(Sentence sentence) {
     this.sentence = sentence;
   }
+
 }

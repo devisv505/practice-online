@@ -15,12 +15,12 @@ public class PracticeOnlineIntegrationTest extends AbstractDynamoDBTest {
   @Test
   public void test() {
     Practice practice = new Practice();
-    practice.setPrimaryKey("test");
+    practice.setPartitionKey("test");
     practice.setSortedKey(Level.C1_C2.toString());
 
     Practice practiceCreated = restTemplate.postForObject("/practice", practice, Practice.class);
 
-    assertEquals(practiceCreated.getPrimaryKey(), practice.getPrimaryKey());
+    assertEquals(practiceCreated.getPartitionKey(), practice.getPartitionKey());
     assertEquals(practiceCreated.getSortedKey(), practice.getSortedKey());
   }
 }

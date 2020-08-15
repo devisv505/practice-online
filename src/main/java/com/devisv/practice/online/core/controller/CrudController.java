@@ -2,16 +2,16 @@ package com.devisv.practice.online.core.controller;
 
 import java.util.List;
 
-public interface CrudController <DTO_INPUT, DTO_OUTPUT, PK, SK> {
+public interface CrudController <DTO_INPUT, DTO_OUTPUT, SK> {
 
   DTO_OUTPUT post(DTO_INPUT createDto);
 
-  DTO_OUTPUT get(PK pk, SK sk);
+  DTO_OUTPUT get(SK sk);
 
   List<DTO_OUTPUT> get();
 
-  DTO_OUTPUT put(DTO_INPUT updateDto, PK pk, SK sk);
+  DTO_OUTPUT put(DTO_INPUT updateDto, SK sk);
 
-  void delete(PK pk, SK sk);
+  void delete(SK sk);
 
 }

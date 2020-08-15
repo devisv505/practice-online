@@ -9,17 +9,17 @@ import java.io.Serializable;
 public abstract class OnlinePractice implements Serializable {
 
   @DynamoDBHashKey(attributeName = "pk")
-  private String primaryKey;
+  private String partitionKey;
 
   @DynamoDBRangeKey(attributeName = "sk")
   private String sortedKey;
 
-  public String getPrimaryKey() {
-    return primaryKey;
+  public String getPartitionKey() {
+    return partitionKey;
   }
 
-  public void setPrimaryKey(String primaryKey) {
-    this.primaryKey = primaryKey;
+  public void setPartitionKey(String partitionKey) {
+    this.partitionKey = partitionKey;
   }
 
   public String getSortedKey() {

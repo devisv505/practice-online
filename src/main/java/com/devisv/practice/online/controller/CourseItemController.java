@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/courses")
-public class CourseController extends SimpleCrudController<InputCourseDto, OutputCourseDto, Course, String, String> {
+public class CourseItemController extends SimpleCrudController<InputCourseDto, OutputCourseDto, Course, String, String> {
 
-  protected CourseController(CourseService crudService, ConverterQualifier converterQualifier) {
+  protected CourseItemController(CourseService crudService, ConverterQualifier converterQualifier) {
     super(crudService, converterQualifier);
   }
 

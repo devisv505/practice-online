@@ -2,14 +2,15 @@ package com.devisv.practice.online.core.repository;
 
 import com.devisv.practice.online.core.model.OnlinePractice;
 import java.util.List;
+import java.util.Optional;
 
 public interface CrudRepository<MODEL extends OnlinePractice, PK, SK> {
 
   MODEL create(MODEL model);
 
-  List<MODEL> getList();
+  List<MODEL> getList(PK pk);
 
-  MODEL getById(PK pk, SK sk);
+  Optional<MODEL> getById(PK pk, SK sk);
 
   MODEL update(MODEL model, PK pk, SK sk);
 

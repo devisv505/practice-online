@@ -7,12 +7,15 @@ import com.devisv.practice.online.core.service.CrudService;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.core.ResolvableType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 public abstract class SimpleCrudController<DTO_INPUT, DTO_OUTPUT, MODEL extends OnlinePractice, PK, SK>
-    implements CrudController<DTO_INPUT, DTO_OUTPUT, PK, SK> {
+    implements CrudController<DTO_INPUT, DTO_OUTPUT, SK> {
 
   protected final CrudService<MODEL, PK, SK> crudService;
 
@@ -38,14 +41,17 @@ public abstract class SimpleCrudController<DTO_INPUT, DTO_OUTPUT, MODEL extends 
 
   @GetMapping
   public List<DTO_OUTPUT> get() {
-    return crudService.getAll()
+    return crudService.getAll(getPartitionKey())
         .stream()
         .map(converterModelToDto::convert)
         .collect(Collectors.toList());
   }
 
-  public DTO_OUTPUT get(PK pk, SK sk) {
-    return null;
+  @GetMapping("/{sk}")
+  public DTO_OUTPUT get(@PathVariable SK sk) {
+    return converterModelToDto.convert(
+        crudService.getById(getPartitionKey(), sk)
+    );
   }
 
   @PostMapping
@@ -58,11 +64,22 @@ public abstract class SimpleCrudController<DTO_INPUT, DTO_OUTPUT, MODEL extends 
         );
   }
 
-  public DTO_OUTPUT put(DTO_INPUT updateDto, PK pk, SK sk) {
-    return null;
+  @PutMapping("/{sk}")
+  public DTO_OUTPUT put(@RequestBody DTO_INPUT updateDto, @PathVariable SK sk) {
+    return
+        converterModelToDto.convert(
+            crudService.update(
+                converterDtoToModel.convert(updateDto),
+                getPartitionKey(),
+                sk
+            )
+        );
   }
 
-  public void delete(PK pk, SK sk) {
-
+  @DeleteMapping("/{sk}")
+  public void delete(@PathVariable SK sk) {
+    crudService.delete(getPartitionKey(), sk);
   }
+
+  protected abstract PK getPartitionKey();
 }

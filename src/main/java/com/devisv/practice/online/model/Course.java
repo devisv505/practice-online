@@ -94,4 +94,5 @@ public class Course extends OnlinePractice {
   public void setCost(int cost) {
     this.cost = cost;
   }
+
 }
