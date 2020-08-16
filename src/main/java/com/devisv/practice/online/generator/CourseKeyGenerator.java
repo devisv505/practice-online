@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CourseKeyGenerator implements PrimaryKeyGenerator<Course> {
 
-  private static final String PK = "COURSES";
+  private static final String PK = "COURSE";
 
   @Override
   public Course generate(Course course) {

@@ -10,6 +10,16 @@ public class CourseItemConverterDtoToModel implements Converter<InputCourseItemD
 
   @Override
   public CourseItem convert(InputCourseItemDto inputCourseItemDto) {
-    return null;
+    CourseItem courseItem = new CourseItem();
+    courseItem.setSortedKey(inputCourseItemDto.getCourseSk());
+    courseItem.setSort(inputCourseItemDto.getSort());
+    courseItem.setPartitionKey(inputCourseItemDto.getCoursePk());
+    courseItem.setCoursePk(inputCourseItemDto.getCoursePk());
+    courseItem.setCourseSk(inputCourseItemDto.getCourseSk());
+    courseItem.setLines(inputCourseItemDto.getLines());
+    courseItem.setName(inputCourseItemDto.getName());
+    courseItem.setType(inputCourseItemDto.getType());
+
+    return courseItem;
   }
 }

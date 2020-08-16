@@ -12,7 +12,17 @@ public class CourseItemConverterModelToDto implements Converter<CourseItem, Outp
 
   @Override
   public OutputCourseItemDto convert(CourseItem courseItem) {
-    return null;
+    OutputCourseItemDto output = new OutputCourseItemDto();
+    output.setPk(courseItem.getPartitionKey());
+    output.setSk(courseItem.getSortedKey());
+    output.setCoursePk(courseItem.getCoursePk());
+    output.setCourseSk(courseItem.getCourseSk());
+    output.setLines(courseItem.getLines());
+    output.setName(courseItem.getName());
+    output.setSort(courseItem.getSort());
+    output.setType(courseItem.getType());
+
+    return output;
   }
 
 }
