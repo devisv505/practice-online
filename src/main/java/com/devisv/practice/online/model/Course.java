@@ -10,7 +10,6 @@ public class Course extends OnlinePractice {
   private String name;
 
   @DynamoDBAttribute
-  @DynamoDBTypeConvertedEnum
   private Level level;
 
   @DynamoDBAttribute

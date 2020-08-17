@@ -1,31 +1,19 @@
-package com.devisv.practice.online.model;
+package com.devisv.practice.online.dto;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
-import com.devisv.practice.online.core.model.OnlinePractice;
+import com.devisv.practice.online.model.CourseItemType;
 import java.util.List;
 
+public class InputLessonDto {
 
-public class CourseItem extends OnlinePractice {
-
-  @DynamoDBAttribute
   private String name;
 
-  @DynamoDBAttribute
   private String sort;
 
-  @DynamoDBAttribute
-  @DynamoDBTypeConvertedEnum
   private CourseItemType type;
 
-  @DynamoDBAttribute
   private String coursePk;
 
-  @DynamoDBAttribute
   private String courseSk;
-
-  @DynamoDBAttribute
-  private List<String> lines;
 
   public String getName() {
     return name;
@@ -67,11 +55,4 @@ public class CourseItem extends OnlinePractice {
     this.courseSk = courseSk;
   }
 
-  public List<String> getLines() {
-    return lines;
-  }
-
-  public void setLines(List<String> lines) {
-    this.lines = lines;
-  }
 }

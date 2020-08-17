@@ -1,26 +1,23 @@
 package com.devisv.practice.online.converter;
 
 import com.devisv.practice.online.core.convertor.Converter;
-import com.devisv.practice.online.dto.OutputCourseDto;
-import com.devisv.practice.online.dto.OutputCourseItemDto;
-import com.devisv.practice.online.model.Course;
-import com.devisv.practice.online.model.CourseItem;
+import com.devisv.practice.online.dto.OutputLessonDto;
+import com.devisv.practice.online.model.Lesson;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CourseItemConverterModelToDto implements Converter<CourseItem, OutputCourseItemDto> {
+public class CourseItemConverterModelToDto implements Converter<Lesson, OutputLessonDto> {
 
   @Override
-  public OutputCourseItemDto convert(CourseItem courseItem) {
-    OutputCourseItemDto output = new OutputCourseItemDto();
-    output.setPk(courseItem.getPartitionKey());
-    output.setSk(courseItem.getSortedKey());
-    output.setCoursePk(courseItem.getCoursePk());
-    output.setCourseSk(courseItem.getCourseSk());
-    output.setLines(courseItem.getLines());
-    output.setName(courseItem.getName());
-    output.setSort(courseItem.getSort());
-    output.setType(courseItem.getType());
+  public OutputLessonDto convert(Lesson lesson) {
+    OutputLessonDto output = new OutputLessonDto();
+    output.setPk(lesson.getPartitionKey());
+    output.setSk(lesson.getSortedKey());
+    output.setCoursePk(lesson.getCoursePk());
+    output.setCourseSk(lesson.getCourseSk());
+    output.setName(lesson.getName());
+    output.setSort(lesson.getSort());
+    output.setType(lesson.getType());
 
     return output;
   }

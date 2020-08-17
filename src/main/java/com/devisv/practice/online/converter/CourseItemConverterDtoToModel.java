@@ -1,25 +1,24 @@
 package com.devisv.practice.online.converter;
 
 import com.devisv.practice.online.core.convertor.Converter;
-import com.devisv.practice.online.dto.InputCourseItemDto;
-import com.devisv.practice.online.model.CourseItem;
+import com.devisv.practice.online.dto.InputLessonDto;
+import com.devisv.practice.online.model.Lesson;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CourseItemConverterDtoToModel implements Converter<InputCourseItemDto, CourseItem> {
+public class CourseItemConverterDtoToModel implements Converter<InputLessonDto, Lesson> {
 
   @Override
-  public CourseItem convert(InputCourseItemDto inputCourseItemDto) {
-    CourseItem courseItem = new CourseItem();
-    courseItem.setSortedKey(inputCourseItemDto.getCourseSk());
-    courseItem.setSort(inputCourseItemDto.getSort());
-    courseItem.setPartitionKey(inputCourseItemDto.getCoursePk());
-    courseItem.setCoursePk(inputCourseItemDto.getCoursePk());
-    courseItem.setCourseSk(inputCourseItemDto.getCourseSk());
-    courseItem.setLines(inputCourseItemDto.getLines());
-    courseItem.setName(inputCourseItemDto.getName());
-    courseItem.setType(inputCourseItemDto.getType());
+  public Lesson convert(InputLessonDto inputLessonDto) {
+    Lesson lesson = new Lesson();
+    lesson.setSortedKey(inputLessonDto.getCourseSk());
+    lesson.setSort(inputLessonDto.getSort());
+    lesson.setPartitionKey(inputLessonDto.getCoursePk());
+    lesson.setCoursePk(inputLessonDto.getCoursePk());
+    lesson.setCourseSk(inputLessonDto.getCourseSk());
+    lesson.setName(inputLessonDto.getName());
+    lesson.setType(inputLessonDto.getType());
 
-    return courseItem;
+    return lesson;
   }
 }

@@ -1,6 +1,6 @@
 package com.devisv.practice.online.dto;
 
-public class OutputCourseItemDto extends InputCourseItemDto {
+public class OutputLessonDto extends InputLessonDto {
 
   private String pk;
 
